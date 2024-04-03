@@ -23,6 +23,8 @@ namespace FinalProject
 	{
         protected override void OnClick()
         {
+            form f = new form();
+            f.ShowDialog();
         }
 	}
 }
