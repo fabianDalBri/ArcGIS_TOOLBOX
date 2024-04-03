@@ -24,5 +24,10 @@ namespace FinalProject
             InitializeComponent();
             //first push
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
