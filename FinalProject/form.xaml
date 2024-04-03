@@ -10,11 +10,15 @@
         <Button Content="Bebyggelse" HorizontalAlignment="Left" Margin="53,18,0,0" VerticalAlignment="Top" Click="Bebyggelse_Click" Width="77" Height="20"/>
         <Button Content="Hojddata" HorizontalAlignment="Left" Margin="53,96,0,0" VerticalAlignment="Top" Width="77" Click="Hojddata_Click"/>
         <Button Content="Markdata" HorizontalAlignment="Left" Margin="53,58,0,0" VerticalAlignment="Top" Width="77" Click="Markdata_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="157,18,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="200" Height="20"/>
-        <TextBlock HorizontalAlignment="Left" Margin="157,58,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="200" Height="22"/>
-        <TextBlock HorizontalAlignment="Left" Margin="157,96,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="200" Height="22"/>
         <Button Content="Vagdata" HorizontalAlignment="Left" Margin="53,133,0,0" VerticalAlignment="Top" Width="77" Click="Vagdata_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="157,133,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="200" Height="20"/>
+        <TextBox x:Name="txtBebyggelse" HorizontalAlignment="Left" Margin="187,18,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtMarkdata" HorizontalAlignment="Left" Margin="187,58,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtHojddata" HorizontalAlignment="Left" Margin="187,95,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtVagData" HorizontalAlignment="Left" Margin="187,135,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtBebyggelse_hardcode" HorizontalAlignment="Left" Margin="584,18,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtMarkdata_hardcode" HorizontalAlignment="Left" Margin="584,58,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtHojddata_hardcode" HorizontalAlignment="Left" Margin="584,95,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtVagdata__hardcode" HorizontalAlignment="Left" Margin="584,135,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
