@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,17 @@ namespace FinalProject
         {
             InitializeComponent();
             //first push
+        }
+        public string ChooseFile()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.ShowDialog();
+            ofd.InitialDirectory = @"H:\";
+            //MessageBox.show(ofd.SafeFileName);
+            ofd.Filter = "Files (*.png;*.shp;*.tif)|*.png;*.shp;*.tif|All files(*.*) | *.* ";
+
+            return ofd.FileName;
+
         }
         private void Bebyggelse_Click(object sender, RoutedEventArgs e)
         {
