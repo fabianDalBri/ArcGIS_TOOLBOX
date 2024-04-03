@@ -71,7 +71,7 @@ namespace FinalProject
             Map map = MapView.Active.Map;
             string filepath = txtHojddata.Text;
             //MessageBox.Show(txtHojddata.Text);
-            string outputSlope = @"H:\gis-applikationer\FinalProject\slope.tif";
+            string outputSlope = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slope.tif";
             // Create a raster layer using a path to an image.
             // Note: You can create a raster layer from a url, project item, or data connection.
             QueuedTask.Run(() =>
@@ -88,8 +88,8 @@ namespace FinalProject
                     return;
                 }
                 MessageBox.Show("Slope calculation completed successfully.", "Success");
+                CalculateConstraint(outputSlope, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slopeCalculated.tif", "slope");
             });
-            //CalculateConstraint(outputSlope, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slopeCalculated.tif", "slope");
         }
         private void CalculateConstraint(string inRaster, string outRaster, string type)
         {
@@ -134,7 +134,7 @@ namespace FinalProject
                 }
                 else if (type.Equals("slope"))
                 {
-                    maExpression = $"Con((\"{bandnameArray[0]}\" > 25) & (\"{bandnameArray[0]}\" < 45), 1, 0)";
+                    maExpression = $"Con((\"{bandnameArray[0]}\" < 30), 1, 0)";
                 }
                 //calculate NDVI/NDWI from min max values
                 else if (type.Equals("NDVI"))
