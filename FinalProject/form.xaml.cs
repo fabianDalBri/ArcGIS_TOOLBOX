@@ -24,10 +24,23 @@ namespace FinalProject
             InitializeComponent();
             //first push
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Bebyggelse_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("test");
+
+        }
+        private void Markdata_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Hojddata_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Vagdata_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

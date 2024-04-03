@@ -7,9 +7,14 @@
         mc:Ignorable="d"
         Title="form" Height="450" Width="800">
     <Grid>
-        <Button Content="test" HorizontalAlignment="Left" Margin="317,82,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="429,92,0,0" VerticalAlignment="Top"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="409,247,0,0" VerticalAlignment="Top"/>
+        <Button Content="Bebyggelse" HorizontalAlignment="Left" Margin="53,18,0,0" VerticalAlignment="Top" Click="Bebyggelse_Click" Width="77" Height="20"/>
+        <Button Content="Hojddata" HorizontalAlignment="Left" Margin="53,96,0,0" VerticalAlignment="Top" Width="77" Click="Hojddata_Click"/>
+        <Button Content="Markdata" HorizontalAlignment="Left" Margin="53,58,0,0" VerticalAlignment="Top" Width="77" Click="Markdata_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="157,18,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="200" Height="20"/>
+        <TextBlock HorizontalAlignment="Left" Margin="157,58,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="200" Height="22"/>
+        <TextBlock HorizontalAlignment="Left" Margin="157,96,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="200" Height="22"/>
+        <Button Content="Vagdata" HorizontalAlignment="Left" Margin="53,133,0,0" VerticalAlignment="Top" Width="77" Click="Vagdata_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="157,133,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="200" Height="20"/>
 
     </Grid>
 </Window>
