@@ -15,11 +15,13 @@
         <TextBox x:Name="txtMarkdata" HorizontalAlignment="Left" Margin="294,50,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtHojddata" HorizontalAlignment="Left" Margin="431,50,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" TextChanged="txtHojddata_TextChanged"/>
         <TextBox x:Name="txtVagData" HorizontalAlignment="Left" Margin="10,50,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtBebyggelse_hardcode" HorizontalAlignment="Left" Margin="584,18,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtMarkdata_hardcode" HorizontalAlignment="Left" Margin="584,58,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtHojddata_hardcode" HorizontalAlignment="Left" Margin="584,95,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtVagdata__hardcode" HorizontalAlignment="Left" Margin="584,135,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtBebyggelse_hardcode" HorizontalAlignment="Left" Margin="670,59,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtMarkdata_hardcode" HorizontalAlignment="Left" Margin="670,126,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtHojddata_hardcode" HorizontalAlignment="Left" Margin="664,217,0,0" TextWrapping="Wrap" Text="\\hig-ad\student\homes\gis-applikationer\FinalProject\data\hojddata\665_54_2525_2010.tif" VerticalAlignment="Top" Width="136"/>
+        <TextBox x:Name="txtVagdata__hardcode" HorizontalAlignment="Left" Margin="664,347,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Button Content="Calculate Slope" HorizontalAlignment="Left" Margin="45,217,0,0" VerticalAlignment="Top" Click="Slope_Click"/>
+        <Label Content="höjddata" HorizontalAlignment="Left" Margin="584,214,0,0" VerticalAlignment="Top"/>
+        <Label Content="hårdkodad uri" HorizontalAlignment="Left" Margin="570,55,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

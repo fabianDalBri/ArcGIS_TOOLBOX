@@ -70,14 +70,17 @@ namespace FinalProject
         {
             Map map = MapView.Active.Map;
             string filepath = txtHojddata.Text;
-            string outputSlope = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slope.tif";
+            //MessageBox.Show(txtHojddata.Text);
+            string outputSlope = @"H:\gis-applikationer\FinalProject\slope.tif";
             // Create a raster layer using a path to an image.
             // Note: You can create a raster layer from a url, project item, or data connection.
             QueuedTask.Run(() =>
             {
-                // Run the Slope geoprocessing tool
-                var parameters = Geoprocessing.MakeValueArray(filepath, outputSlope);
+                //Execution of the tool.
+                string inMeasures = "DEGREE";
+                var parameters = Geoprocessing.MakeValueArray(filepath, outputSlope, inMeasures);
                 var gpSlope = Geoprocessing.ExecuteToolAsync("Slope_3d", parameters);
+
                 // Check if the tool executed successfully
                 if (gpSlope.Result.IsFailed)
                 {
@@ -85,8 +88,8 @@ namespace FinalProject
                     return;
                 }
                 MessageBox.Show("Slope calculation completed successfully.", "Success");
-                CalculateConstraint(outputSlope, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slopeCalculated.tif", "slope");
             });
+            //CalculateConstraint(outputSlope, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slopeCalculated.tif", "slope");
         }
         private void CalculateConstraint(string inRaster, string outRaster, string type)
         {
