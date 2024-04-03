@@ -68,7 +68,6 @@ namespace FinalProject
 
         private void CalculateSlope()
         {
-            Map map = MapView.Active.Map;
             string filepath = txtHojddata.Text;
             //MessageBox.Show(txtHojddata.Text);
             string outputSlope = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slope.tif";
@@ -91,7 +90,35 @@ namespace FinalProject
                 CalculateConstraint(outputSlope, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slopeCalculated.tif", "slope");
             });
         }
-        private void CalculateConstraint(string inRaster, string outRaster, string type)
+        private void CalculateAspect()
+        {
+            string filepath = txtHojddata.Text;
+            string outputAspect = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\aspect.tif";
+            //Uri defaultGeodatabasePath = new Uri(Project.Current.DefaultGeodatabasePath);
+            // Create a raster layer using a path to an image.
+            // Note: You can create a raster layer from a url, project item, or data connection.
+            QueuedTask.Run(() =>
+            {
+                // Run the Slope geoprocessing tool
+                var parameters = Geoprocessing.MakeValueArray(filepath, outputAspect);
+                var gpSlope = Geoprocessing.ExecuteToolAsync("Aspect_3d", parameters);
+                // Check if the tool executed successfully
+                if (gpSlope.Result.IsFailed)
+                {
+                    MessageBox.Show("Aspect calculation failed.", "Error");
+                    return;
+                }
+                MessageBox.Show("Aspect calculation completed successfully.", "Success");
+                CalculateConstraint(outputAspect, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\directionCalculated.tif", "direction");
+            });
+        }
+        private void CalculateDEM()
+        {
+            string filepath = txtHojddata.Text;
+            CalculateConstraint(filepath, @"\\hig-ad\student\homes\gis-applikationer\upg7\heightCalculated.tif", "height");
+        }
+
+            private void CalculateConstraint(string inRaster, string outRaster, string type)
         {
             Map map = MapView.Active.Map;
             string filepath = inRaster;
@@ -130,7 +157,7 @@ namespace FinalProject
                 //calculate medium to high height from min max values
                 if (type.Equals("height"))
                 {
-                    maExpression = $"Con(\"{bandnameArray[0]}\" > 8.5, 1, 0)";
+                    maExpression = $"Con(\"{bandnameArray[0]}\" < 150, 1, 0)";
                 }
                 else if (type.Equals("slope"))
                 {
@@ -178,15 +205,23 @@ namespace FinalProject
                 }
             });
         }
+        private void txtHojddata_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
+        } 
         private void Slope_Click(object sender, RoutedEventArgs e)
         {
             CalculateSlope();
         }
 
-        private void txtHojddata_TextChanged(object sender, TextChangedEventArgs e)
+        private void Aspect_Click(object sender, RoutedEventArgs e)
         {
+            CalculateAspect();  
+        }
 
+        private void Height_Click(object sender, RoutedEventArgs e)
+        {
+            CalculateDEM();
         }
     }
 }

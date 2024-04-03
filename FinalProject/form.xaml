@@ -22,6 +22,8 @@
         <Button Content="Calculate Slope" HorizontalAlignment="Left" Margin="45,217,0,0" VerticalAlignment="Top" Click="Slope_Click"/>
         <Label Content="höjddata" HorizontalAlignment="Left" Margin="584,214,0,0" VerticalAlignment="Top"/>
         <Label Content="hårdkodad uri" HorizontalAlignment="Left" Margin="570,55,0,0" VerticalAlignment="Top"/>
+        <Button Content="Calculate Aspect" HorizontalAlignment="Left" Margin="45,243,0,0" VerticalAlignment="Top" Click="Aspect_Click"/>
+        <Button Content="Calculate Height" HorizontalAlignment="Left" Margin="45,268,0,0" VerticalAlignment="Top" Click="Height_Click"/>
 
     </Grid>
 </Window>
