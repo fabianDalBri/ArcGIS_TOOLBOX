@@ -157,7 +157,7 @@ namespace FinalProject
                 //calculate medium to high height from min max values
                 if (type.Equals("height"))
                 {
-                    maExpression = $"Con(\"{bandnameArray[0]}\" < 150, 1, 0)";
+                    maExpression = $"Con(\"{bandnameArray[0]}\" < 200, 1, 0)";
                 }
                 else if (type.Equals("slope"))
                 {
