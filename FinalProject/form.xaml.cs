@@ -1,20 +1,16 @@
-﻿using ArcGIS.Desktop.Core.Geoprocessing;
+﻿using ArcGIS.Core.CIM;
+using ArcGIS.Core.Geometry;
+using ArcGIS.Desktop.Core.Geoprocessing;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Mapping;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FinalProject
 {
@@ -63,7 +59,15 @@ namespace FinalProject
 
         private void Vagdata_Click(object sender, RoutedEventArgs e)
         {
+            txtVagData.Text = ChooseFile();
+            string uriShp = txtVagData.Text;
+            Map map = MapView.Active.Map;
+            Uri uri = new Uri(uriShp);
 
+            QueuedTask.Run(() =>
+            {
+                LayerFactory.Instance.CreateLayer(uri, map);
+            });
         }
 
         private void CalculateSlope()
@@ -112,10 +116,57 @@ namespace FinalProject
                 CalculateConstraint(outputAspect, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\directionCalculated.tif", "direction");
             });
         }
+        public void CalculateBuffer()
+        {
+            string filepath = txtVagData.Text;
+            string outputAspect = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffer.shp";
+            //Uri defaultGeodatabasePath = new Uri(Project.Current.DefaultGeodatabasePath);
+            // Create a raster layer using a path to an image.
+            // Note: You can create a raster layer from a url, project item, or data connection.
+            QueuedTask.Run(() =>
+            {
+                // Run the Slope geoprocessing tool
+                var parameters = Geoprocessing.MakeValueArray(filepath, outputAspect, 200);
+                var gpSlope = Geoprocessing.ExecuteToolAsync("Analysis.buffer", parameters);
+                // Check if the tool executed successfully
+                if (gpSlope.Result.IsFailed)
+                {
+                    MessageBox.Show("Buffer calculation failed.", "Error");
+                    return;
+                }
+                MessageBox.Show("Buffer calculation completed successfully.", "Success");
+                BufferToRaster(outputAspect);
+            });
+
+        }
+
         private void CalculateDEM()
         {
             string filepath = txtHojddata.Text;
             CalculateConstraint(filepath, @"\\hig-ad\student\homes\gis-applikationer\upg7\heightCalculated.tif", "height");
+        }
+
+        public void BufferToRaster(string input)
+        {
+            string filepath = input;
+            string outputAspect = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\bufferRaster.tif";
+            //Uri defaultGeodatabasePath = new Uri(Project.Current.DefaultGeodatabasePath);
+            // Create a raster layer using a path to an image.
+            // Note: You can create a raster layer from a url, project item, or data connection.
+            QueuedTask.Run(() =>
+            {
+                // Run the Slope geoprocessing tool
+                var parameters = Geoprocessing.MakeValueArray(filepath, "BUFF_DIST", outputAspect);
+                var gpSlope = Geoprocessing.ExecuteToolAsync("conversion.PolygonToRaster", parameters);
+
+                // Check if the tool executed successfully
+                if (gpSlope.Result.IsFailed)
+                {
+                    MessageBox.Show("Buffer calculation failed.", "Error");
+                    return;
+                }
+                MessageBox.Show("Buffer calculation completed successfully.", "Success");
+            });
         }
 
             private void CalculateConstraint(string inRaster, string outRaster, string type)
@@ -176,6 +227,10 @@ namespace FinalProject
                 {
                     maExpression = $"Con((\"{bandnameArray[0]}\" > 112.5) & (\"{bandnameArray[0]}\" < 247.5), 0, 1)";
                 }
+                else if (type.Equals("buffer"))
+                {
+                    maExpression = $"Con((\"{bandnameArray[0]}\" = 100, 1, 0)";
+                }
 
 
                 MessageBox.Show(maExpression);
@@ -222,6 +277,11 @@ namespace FinalProject
         private void Height_Click(object sender, RoutedEventArgs e)
         {
             CalculateDEM();
+        }
+
+        private void Buffer_Click(object sender, RoutedEventArgs e)
+        {
+            CalculateBuffer();
         }
     }
 }
