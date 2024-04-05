@@ -119,14 +119,14 @@ namespace FinalProject
         public void CalculateBuffer()
         {
             string filepath = txtVagData.Text;
-            string outputAspect = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffer.shp";
+            string outputbuff = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffer.shp";
             //Uri defaultGeodatabasePath = new Uri(Project.Current.DefaultGeodatabasePath);
             // Create a raster layer using a path to an image.
             // Note: You can create a raster layer from a url, project item, or data connection.
             QueuedTask.Run(() =>
             {
                 // Run the Slope geoprocessing tool
-                var parameters = Geoprocessing.MakeValueArray(filepath, outputAspect, 200);
+                var parameters = Geoprocessing.MakeValueArray(filepath, outputbuff, 200);
                 var gpSlope = Geoprocessing.ExecuteToolAsync("Analysis.buffer", parameters);
                 // Check if the tool executed successfully
                 if (gpSlope.Result.IsFailed)
@@ -135,7 +135,7 @@ namespace FinalProject
                     return;
                 }
                 MessageBox.Show("Buffer calculation completed successfully.", "Success");
-                BufferToRaster(outputAspect);
+                BufferToRaster(outputbuff);
             });
 
         }
@@ -149,14 +149,14 @@ namespace FinalProject
         public void BufferToRaster(string input)
         {
             string filepath = input;
-            string outputAspect = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\bufferRaster.tif";
+            string outputRaster = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\bufferRaster.tif";
             //Uri defaultGeodatabasePath = new Uri(Project.Current.DefaultGeodatabasePath);
             // Create a raster layer using a path to an image.
             // Note: You can create a raster layer from a url, project item, or data connection.
             QueuedTask.Run(() =>
             {
                 // Run the Slope geoprocessing tool
-                var parameters = Geoprocessing.MakeValueArray(filepath, "BUFF_DIST", outputAspect);
+                var parameters = Geoprocessing.MakeValueArray(filepath, "BUFF_DIST", outputRaster);
                 var gpSlope = Geoprocessing.ExecuteToolAsync("conversion.PolygonToRaster", parameters);
 
                 // Check if the tool executed successfully
@@ -166,6 +166,9 @@ namespace FinalProject
                     return;
                 }
                 MessageBox.Show("Buffer calculation completed successfully.", "Success");
+
+                string bufferToRaster = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRaster.tif";
+                CalculateConstraint(outputRaster,bufferToRaster,"buffer");
             });
         }
 
@@ -229,7 +232,7 @@ namespace FinalProject
                 }
                 else if (type.Equals("buffer"))
                 {
-                    maExpression = $"Con((\"{bandnameArray[0]}\" = 100, 1, 0)";
+                    maExpression = $"Con((\"{bandnameArray[0]}\" > 1, 1, 0)";
                 }
 
 
