@@ -167,13 +167,12 @@ namespace FinalProject
                 }
                 MessageBox.Show("Buffer calculation completed successfully.", "Success");
 
-                string bufferToRaster = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRaster.tif";
-                CalculateConstraint(outputRaster,bufferToRaster,"buffer");
+                CalculateConstraint(outputRaster, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRaster.tif","buffer");
             });
         }
 
             private void CalculateConstraint(string inRaster, string outRaster, string type)
-        {
+            {
             Map map = MapView.Active.Map;
             string filepath = inRaster;
 
@@ -232,7 +231,7 @@ namespace FinalProject
                 }
                 else if (type.Equals("buffer"))
                 {
-                    maExpression = $"Con((\"{bandnameArray[0]}\" > 1, 1, 0)";
+                    maExpression = $"Con((\"{bandnameArray[0]}\" > 1), 1, 0)";
                 }
 
 
