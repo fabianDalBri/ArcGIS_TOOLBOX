@@ -24,6 +24,11 @@ namespace FinalProject
             InitializeComponent();
             //first push
         }
+
+        public static class Global
+        {
+            public static string type = "";
+        }
         public String ChooseFile()
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -94,6 +99,11 @@ namespace FinalProject
                 CalculateConstraint(outputSlope, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slopeCalculated.tif", "slope");
             });
         }
+                private void CalculateDEM()
+        {
+            string filepath = txtHojddata.Text;
+            CalculateConstraint(filepath, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\heightCalculated.tif", "height");
+        }
         private void CalculateAspect()
         {
             string filepath = txtHojddata.Text;
@@ -135,14 +145,32 @@ namespace FinalProject
                     return;
                 }
                 MessageBox.Show("Buffer calculation completed successfully.", "Success");
-                BufferToRaster(outputbuff);
+                EraseBuffer(outputbuff);
             });
 
         }
-        private void CalculateDEM()
+        private void EraseBuffer(string input)
         {
-            string filepath = txtHojddata.Text;
-            CalculateConstraint(filepath, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\heightCalculated.tif", "height");
+            string rutnatpath = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\rutnat.shp";
+            string bufferpath = input;
+            string output = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\mergedBuffer.shp";
+            //Uri defaultGeodatabasePath = new Uri(Project.Current.DefaultGeodatabasePath);
+            // Create a raster layer using a path to an image.
+            // Note: You can create a raster layer from a url, project item, or data connection.
+            QueuedTask.Run(() =>
+            {
+                // Run the Slope geoprocessing tool
+                var parameters = Geoprocessing.MakeValueArray(rutnatpath, bufferpath, output);
+                var gpSlope = Geoprocessing.ExecuteToolAsync("Analysis.erase", parameters);
+                // Check if the tool executed successfully
+                if (gpSlope.Result.IsFailed)
+                {
+                    MessageBox.Show("Merge calculation failed.", "Error");
+                    return;
+                }
+                MessageBox.Show("Merge calculation completed successfully.", "Success");
+                BufferToRaster(output);
+            });
         }
 
         public void BufferToRaster(string input)
@@ -155,22 +183,37 @@ namespace FinalProject
             QueuedTask.Run(() =>
             {
                 // Run the Slope geoprocessing tool
-                var parameters = Geoprocessing.MakeValueArray(filepath, "BUFF_DIST", outputRaster);
+                var parameters = Geoprocessing.MakeValueArray(filepath, null, outputRaster);
                 var gpSlope = Geoprocessing.ExecuteToolAsync("conversion.PolygonToRaster", parameters);
 
                 // Check if the tool executed successfully
                 if (gpSlope.Result.IsFailed)
                 {
-                    MessageBox.Show("Buffer calculation failed.", "Error");
+                    MessageBox.Show("Buffer to raster calculation failed.", "Error");
                     return;
                 }
-                MessageBox.Show("Buffer calculation completed successfully.", "Success");
+                MessageBox.Show("Buffer to raster calculation completed successfully.", "Success");
+                if (Global.type.Equals("roads"))
+                {
+                    CalculateConstraint(outputRaster, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterRoads.tif", "bufferedRoads");
+                }
+                else if (Global.type.Equals("water"))
+                {
+                    CalculateConstraint(outputRaster, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterWater.tif", "buffered");
+                }
+                else if (Global.type.Equals("rivers"))
+                {
+                    CalculateConstraint(outputRaster, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterRivers.tif", "buffered");
+                }
+                else if (Global.type.Equals("buildings"))
+                {
+                    CalculateConstraint(outputRaster, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterBuildings.tif", "buffered");
+                }
 
-                CalculateConstraint(outputRaster, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRaster.tif","buffer");
             });
         }
 
-            private void CalculateConstraint(string inRaster, string outRaster, string type)
+        private void CalculateConstraint(string inRaster, string outRaster, string type)
             {
             Map map = MapView.Active.Map;
             string filepath = inRaster;
@@ -228,10 +271,15 @@ namespace FinalProject
                 {
                     maExpression = $"Con((\"{bandnameArray[0]}\" > 112.5) & (\"{bandnameArray[0]}\" < 247.5), 0, 1)";
                 }
-                else if (type.Equals("buffer"))
+                else if (type.Equals("bufferedRoads"))
                 {
-                    maExpression = $"Con((\"{bandnameArray[0]}\" > 1), 1, 0)";
+                    maExpression = $"Con((IsNull(\"{bandnameArray[0]}\")), 1, 0)";
                 }
+                else if (type.Equals("buffered"))
+                {
+                    maExpression = $"Con((IsNull(\"{bandnameArray[0]}\")), 0, 1)";
+                }
+
 
 
                 MessageBox.Show(maExpression);
@@ -266,11 +314,14 @@ namespace FinalProject
             string slope = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slopeCalculated.tif";
             string height = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\heightCalculated.tif";
             string direction = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\directionCalculated.tif";
-            string buffer = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRaster.tif";
+            string bufferRivers = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterRivers.tif";
+            string bufferWater = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterWater.tif";
+            string bufferRoads = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterRoads.tif";
+            string bufferBuildings = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterBuildings.tif";
             //not using NDWI since the raster doesnt have any NDWI data
 
-            string maExpression = $"Int(\"{slope}\") * Int(\"{height}\") * Int(\"{direction}\") * Int(\"{buffer}\")";
-            string output = @"\\hig-ad\student\homes\gis-applikationer\upg7\MCA.tif";
+            string maExpression = $"Int(\"{slope}\") * Int(\"{height}\") * Int(\"{direction}\") * Int(\"{bufferRivers}\") * Int(\"{bufferRoads}\") * Int(\"{bufferRoads}\")";
+            string output = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\MCA.tif";
 
             var valueArray = Geoprocessing.MakeValueArray(maExpression, output);
             var gpTool = Geoprocessing.ExecuteToolAsync("RasterCalculator_sa", valueArray);
@@ -298,7 +349,7 @@ namespace FinalProject
             string rasterPath = uri.LocalPath;
 
             MessageBox.Show(rasterPath);
-            string outputShapefilePath = @"\\hig-ad\student\homes\gis-applikationer\upg7\finalMCApolygon.shp";
+            string outputShapefilePath = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\finalMCApolygon.shp";
             MessageBox.Show(outputShapefilePath);
             // Perform the conversion
             QueuedTask.Run(() =>
@@ -330,12 +381,32 @@ namespace FinalProject
 
         private void Buffer_Click(object sender, RoutedEventArgs e)
         {
+            checkRadio();
             CalculateBuffer();
         }
-
+        public void checkRadio()
+        {
+            if(roads.IsChecked == true)
+            {
+                Global.type = "roads";
+            }
+            else if(water.IsChecked == true)
+            {
+                Global.type = "water";
+            }
+            else if (rivers.IsChecked == true)
+            {
+                Global.type = "rivers";
+            }
+            else if (buildings.IsChecked == true)
+            {
+                Global.type = "buildings";
+            }
+        }
         private void MCA_Click(object sender, RoutedEventArgs e)
         {
             createMCA();
         }
+
     }
 }
