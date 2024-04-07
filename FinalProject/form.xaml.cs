@@ -139,11 +139,10 @@ namespace FinalProject
             });
 
         }
-
         private void CalculateDEM()
         {
             string filepath = txtHojddata.Text;
-            CalculateConstraint(filepath, @"\\hig-ad\student\homes\gis-applikationer\upg7\heightCalculated.tif", "height");
+            CalculateConstraint(filepath, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\heightCalculated.tif", "height");
         }
 
         public void BufferToRaster(string input)
@@ -262,6 +261,54 @@ namespace FinalProject
                 }
             });
         }
+        private void createMCA()
+        {
+            string slope = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slopeCalculated.tif";
+            string height = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\heightCalculated.tif";
+            string direction = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\directionCalculated.tif";
+            string buffer = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRaster.tif";
+            //not using NDWI since the raster doesnt have any NDWI data
+
+            string maExpression = $"Int(\"{slope}\") * Int(\"{height}\") * Int(\"{direction}\") * Int(\"{buffer}\")";
+            string output = @"\\hig-ad\student\homes\gis-applikationer\upg7\MCA.tif";
+
+            var valueArray = Geoprocessing.MakeValueArray(maExpression, output);
+            var gpTool = Geoprocessing.ExecuteToolAsync("RasterCalculator_sa", valueArray);
+
+            if (gpTool.Result.IsFailed)
+            {
+                // Get the tool errors
+                var errors = gpTool.Result.ErrorMessages.Select(err => err.Text);
+                // Display errors
+                MessageBox.Show("Error executing MCA calculator: " + string.Join(Environment.NewLine, errors));
+            }
+            else
+            {
+                MessageBox.Show("MCA Calculator execution successful");
+                RastertoPolygon();
+            }
+        }
+        private void RastertoPolygon()
+        {
+            Map map = MapView.Active.Map;
+            var firstRasterLayer = MapView.Active.Map.GetLayersAsFlattenedList()[0] as RasterLayer;
+            // Specify the path to the input raster dataset
+            var uri = firstRasterLayer.GetPath();
+            // Convert the Uri.LocalPath to string
+            string rasterPath = uri.LocalPath;
+
+            MessageBox.Show(rasterPath);
+            string outputShapefilePath = @"\\hig-ad\student\homes\gis-applikationer\upg7\finalMCApolygon.shp";
+            MessageBox.Show(outputShapefilePath);
+            // Perform the conversion
+            QueuedTask.Run(() =>
+            {
+                // Convert raster to polygon
+                var parameters = Geoprocessing.MakeValueArray(rasterPath, outputShapefilePath);
+                var gpResult = Geoprocessing.ExecuteToolAsync("RasterToPolygon_conversion", parameters,
+               null).Result;
+            });
+        }
         private void txtHojddata_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -284,6 +331,11 @@ namespace FinalProject
         private void Buffer_Click(object sender, RoutedEventArgs e)
         {
             CalculateBuffer();
+        }
+
+        private void MCA_Click(object sender, RoutedEventArgs e)
+        {
+            createMCA();
         }
     }
 }

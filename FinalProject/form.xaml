@@ -26,6 +26,7 @@
         <Button Content="Calculate Aspect" HorizontalAlignment="Left" Margin="184,163,0,0" VerticalAlignment="Top" Click="Aspect_Click"/>
         <Button Content="Calculate Height" HorizontalAlignment="Left" Margin="184,138,0,0" VerticalAlignment="Top" Click="Height_Click"/>
         <Button Content="Calculate Buffer" HorizontalAlignment="Left" Margin="28,188,0,0" VerticalAlignment="Top" Click="Buffer_Click"/>
+        <Button Content="Create MCA" HorizontalAlignment="Left" Margin="10,263,0,0" VerticalAlignment="Top" Click="MCA_Click"/>
 
 
     </Grid>
