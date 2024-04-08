@@ -5,22 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalProject"
         mc:Ignorable="d"
-        Title="form" Height="450" Width="702">
+        Title="form" Height="351" Width="389">
     <Grid>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="214,11,328,154"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="10,10,531,154"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="414,11,130,154"/>
-        <Button Content="Hojddata" HorizontalAlignment="Left" Margin="253,23,0,0" VerticalAlignment="Top" Width="78" Click="Hojddata_Click"/>
-        <Button Content="Markdata" HorizontalAlignment="Left" Margin="453,23,0,0" VerticalAlignment="Top" Width="78" Click="Markdata_Click"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="194,11,22,46"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="10,10,214,46"/>
+        <Button Content="Hojddata" HorizontalAlignment="Left" Margin="234,23,0,0" VerticalAlignment="Top" Width="80" Click="Hojddata_Click"/>
         <Button Content="Bufferdata" HorizontalAlignment="Left" Margin="50,22,0,0" VerticalAlignment="Top" Width="76" Click="Vagdata_Click"/>
-        <TextBox x:Name="txtMarkdata" HorizontalAlignment="Left" Margin="432,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtHojddata" HorizontalAlignment="Left" Margin="232,48,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" TextChanged="txtHojddata_TextChanged"/>
+        <TextBox x:Name="txtHojddata" HorizontalAlignment="Left" Margin="213,48,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="123" TextChanged="txtHojddata_TextChanged"/>
         <TextBox x:Name="txtVagData" HorizontalAlignment="Left" Margin="28,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Calculate Slope" HorizontalAlignment="Left" Margin="232,231,0,0" VerticalAlignment="Top" Click="Slope_Click"/>
-        <Button Content="Calculate Aspect" HorizontalAlignment="Left" Margin="232,205,0,0" VerticalAlignment="Top" Click="Aspect_Click"/>
-        <Button Content="Calculate Height" HorizontalAlignment="Left" Margin="232,181,0,0" VerticalAlignment="Top" Click="Height_Click"/>
+        <Button Content="Calculate Slope" HorizontalAlignment="Left" Margin="213,231,0,0" VerticalAlignment="Top" Click="Slope_Click" Width="87"/>
+        <Button Content="Calculate Aspect" HorizontalAlignment="Left" Margin="213,205,0,0" VerticalAlignment="Top" Click="Aspect_Click" Width="93"/>
+        <Button Content="Calculate Height" HorizontalAlignment="Left" Margin="213,181,0,0" VerticalAlignment="Top" Click="Height_Click" Width="93"/>
         <Button Content="Calculate Buffer" HorizontalAlignment="Left" Margin="28,230,0,0" VerticalAlignment="Top" Click="Buffer_Click"/>
-        <Button Content="Create MCA" HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Click="MCA_Click"/>
+        <Button Content="Create MCA" HorizontalAlignment="Left" Margin="10,294,0,0" VerticalAlignment="Top" Click="MCA_Click"/>
         <Grid HorizontalAlignment="Left" Height="103" Margin="28,121,0,0" VerticalAlignment="Top" Width="92">
             <RadioButton x:Name="water" Content="Water" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="roads" Content="Roads" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True"/>
