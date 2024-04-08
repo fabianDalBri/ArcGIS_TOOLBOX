@@ -145,9 +145,39 @@ namespace FinalProject
                     return;
                 }
                 MessageBox.Show("Buffer calculation completed successfully.", "Success");
-                EraseBuffer(outputbuff);
+                if (Global.type.Equals("roads"))
+                {
+                    CalculateBufferTwo();
+                }
+                else {
+                    EraseBuffer(outputbuff);
+                }
+                
             });
 
+        }
+        public void CalculateBufferTwo()
+        {
+            string filepath = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffer.shp";
+            string outputbuff = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\bufferTwo.shp";
+            //Uri defaultGeodatabasePath = new Uri(Project.Current.DefaultGeodatabasePath);
+            // Create a raster layer using a path to an image.
+            // Note: You can create a raster layer from a url, project item, or data connection.
+            QueuedTask.Run(() =>
+            {
+                // Run the Slope geoprocessing tool
+                var parameters = Geoprocessing.MakeValueArray(filepath, outputbuff, 10);
+
+                var gpSlope = Geoprocessing.ExecuteToolAsync("Analysis.buffer", parameters);
+                // Check if the tool executed successfully
+                if (gpSlope.Result.IsFailed)
+                {
+                    MessageBox.Show("Buffer calculation failed.", "Error");
+                    return;
+                }
+                MessageBox.Show("Buffer calculation completed successfully.", "Success");
+                EraseBuffer(outputbuff);
+            });
         }
         private void EraseBuffer(string input)
         {
@@ -165,10 +195,10 @@ namespace FinalProject
                 // Check if the tool executed successfully
                 if (gpSlope.Result.IsFailed)
                 {
-                    MessageBox.Show("Merge calculation failed.", "Error");
+                    MessageBox.Show("erase calculation failed.", "Error");
                     return;
                 }
-                MessageBox.Show("Merge calculation completed successfully.", "Success");
+                MessageBox.Show("erase calculation completed successfully.", "Success");
                 BufferToRaster(output);
             });
         }
@@ -258,15 +288,6 @@ namespace FinalProject
                 {
                     maExpression = $"Con((\"{bandnameArray[0]}\" < 30), 1, 0)";
                 }
-                //calculate NDVI/NDWI from min max values
-                else if (type.Equals("NDVI"))
-                {
-                    maExpression = $"Con(\"{bandnameArray[0]}\" > 0.53, 1, 0)";
-                }
-                else if (type.Equals("NDWI"))
-                {
-                    maExpression = "(" + bandnameArray[0] + "-" + bandnameArray[2] + ")" + "/" + "(" + bandnameArray[0] + "+" + bandnameArray[2] + ")";
-                }
                 else if (type.Equals("direction"))
                 {
                     maExpression = $"Con((\"{bandnameArray[0]}\" > 112.5) & (\"{bandnameArray[0]}\" < 247.5), 0, 1)";
@@ -279,6 +300,7 @@ namespace FinalProject
                 {
                     maExpression = $"Con((IsNull(\"{bandnameArray[0]}\")), 0, 1)";
                 }
+
 
 
 
@@ -309,6 +331,7 @@ namespace FinalProject
                 }
             });
         }
+
         private void createMCA()
         {
             string slope = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slopeCalculated.tif";
@@ -318,10 +341,14 @@ namespace FinalProject
             string bufferWater = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterWater.tif";
             string bufferRoads = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterRoads.tif";
             string bufferBuildings = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterBuildings.tif";
-            //not using NDWI since the raster doesnt have any NDWI data
+            string windData = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\VindRasterUpdated.tif";
 
-            string maExpression = $"Int(\"{slope}\") * Int(\"{height}\") * Int(\"{direction}\") * Int(\"{bufferRivers}\") * Int(\"{bufferRoads}\") * Int(\"{bufferRoads}\")";
+
+
+            string maExpression = $"Int(\"{slope}\") * Int(\"{height}\") * Int(\"{direction}\") * Int(\"{bufferRivers}\") * Int(\"{bufferRoads}\") * Int(\"{bufferBuildings}\") * Int(\"{bufferWater}\") * Int(\"{windData}\")";
             string output = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\MCA.tif";
+
+            MessageBox.Show(maExpression);  
 
             var valueArray = Geoprocessing.MakeValueArray(maExpression, output);
             var gpTool = Geoprocessing.ExecuteToolAsync("RasterCalculator_sa", valueArray);
