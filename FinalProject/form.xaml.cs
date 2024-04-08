@@ -145,40 +145,11 @@ namespace FinalProject
                     return;
                 }
                 MessageBox.Show("Buffer calculation completed successfully.", "Success");
-                if (Global.type.Equals("roads"))
-                {
-                    CalculateBufferTwo();
-                }
-                else {
                     EraseBuffer(outputbuff);
-                }
-                
             });
 
         }
-        public void CalculateBufferTwo()
-        {
-            string filepath = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffer.shp";
-            string outputbuff = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\bufferTwo.shp";
-            //Uri defaultGeodatabasePath = new Uri(Project.Current.DefaultGeodatabasePath);
-            // Create a raster layer using a path to an image.
-            // Note: You can create a raster layer from a url, project item, or data connection.
-            QueuedTask.Run(() =>
-            {
-                // Run the Slope geoprocessing tool
-                var parameters = Geoprocessing.MakeValueArray(filepath, outputbuff, 10);
 
-                var gpSlope = Geoprocessing.ExecuteToolAsync("Analysis.buffer", parameters);
-                // Check if the tool executed successfully
-                if (gpSlope.Result.IsFailed)
-                {
-                    MessageBox.Show("Buffer calculation failed.", "Error");
-                    return;
-                }
-                MessageBox.Show("Buffer calculation completed successfully.", "Success");
-                EraseBuffer(outputbuff);
-            });
-        }
         private void EraseBuffer(string input)
         {
             string rutnatpath = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\rutnat.shp";
@@ -290,7 +261,7 @@ namespace FinalProject
                 }
                 else if (type.Equals("direction"))
                 {
-                    maExpression = $"Con((\"{bandnameArray[0]}\" > 112.5) & (\"{bandnameArray[0]}\" < 247.5), 0, 1)";
+                    maExpression = $"Con((\"{bandnameArray[0]}\" > 112.5) & (\"{bandnameArray[0]}\" < 360), 0, 1)";
                 }
                 else if (type.Equals("bufferedRoads"))
                 {
