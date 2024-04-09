@@ -5,32 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalProject"
         mc:Ignorable="d"
-        Title="form" Height="351" Width="568">
+        Title="form" Height="364" Width="568">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="174*"/>
             <RowDefinition Height="161*"/>
         </Grid.RowDefinitions>
         <Rectangle HorizontalAlignment="Left" Height="279" Margin="10,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160"/>
-        <Rectangle HorizontalAlignment="Left" Height="279" Margin="396,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160"/>
-        <Rectangle HorizontalAlignment="Center" Height="279" Margin="0,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160"/>
-        <Button Content="Hojddata" HorizontalAlignment="Left" Margin="436,22,0,0" VerticalAlignment="Top" Width="80" Click="Hojddata_Click"/>
+        <Rectangle HorizontalAlignment="Left" Height="279" Margin="373,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160"/>
+        <Rectangle HorizontalAlignment="Left" Height="279" Margin="194,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160"/>
+        <Button Content="Hojddata" HorizontalAlignment="Left" Margin="413,22,0,0" VerticalAlignment="Top" Width="80" Click="Hojddata_Click"/>
         <Button Content="Bufferdata" HorizontalAlignment="Left" Margin="50,22,0,0" VerticalAlignment="Top" Width="76" Click="Vagdata_Click"/>
-        <TextBox x:Name="txtHojddata" HorizontalAlignment="Left" Margin="414,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="123" TextChanged="txtHojddata_TextChanged"/>
+        <TextBox x:Name="txtHojddata" HorizontalAlignment="Left" Margin="391,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="123" TextChanged="txtHojddata_TextChanged"/>
         <TextBox x:Name="txtVagData" HorizontalAlignment="Left" Margin="28,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Calculate Slope" HorizontalAlignment="Left" Margin="414,56,0,0" VerticalAlignment="Top" Click="Slope_Click" Width="87" Grid.Row="1"/>
-        <Button Content="Calculate Aspect" HorizontalAlignment="Left" Margin="414,30,0,0" VerticalAlignment="Top" Click="Aspect_Click" Width="93" Grid.Row="1"/>
-        <Button Content="Calculate Height" HorizontalAlignment="Left" Margin="414,5,0,0" VerticalAlignment="Top" Click="Height_Click" Width="93" Grid.Row="1"/>
+        <Button Content="Calculate Slope" HorizontalAlignment="Left" Margin="391,56,0,0" VerticalAlignment="Top" Click="Slope_Click" Width="87" Grid.Row="1"/>
+        <Button Content="Calculate Aspect" HorizontalAlignment="Left" Margin="391,30,0,0" VerticalAlignment="Top" Click="Aspect_Click" Width="93" Grid.Row="1"/>
+        <Button Content="Calculate Height" HorizontalAlignment="Left" Margin="391,5,0,0" VerticalAlignment="Top" Click="Height_Click" Width="93" Grid.Row="1"/>
         <Button Content="Calculate Buffer" HorizontalAlignment="Left" Margin="28,56,0,0" VerticalAlignment="Top" Click="Buffer_Click" Grid.Row="1"/>
-        <Button Content="Create MCA" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Click="MCA_Click" Grid.Row="1"/>
+        <Button Content="Create MCA" HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top" Click="MCA_Click" Grid.Row="1"/>
         <Grid HorizontalAlignment="Left" Height="103" Margin="28,121,0,0" VerticalAlignment="Top" Width="92" Grid.RowSpan="2">
             <RadioButton x:Name="water" Content="Water" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="roads" Content="Roads" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True"/>
             <RadioButton x:Name="rivers" Content="Rivers" HorizontalAlignment="Left" Margin="0,52,0,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="buildings" Content="Buildings" HorizontalAlignment="Left" Margin="0,78,0,0" VerticalAlignment="Top"/>
-
-
         </Grid>
+        <Label Content="Added data" HorizontalAlignment="Left" Margin="238,22,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtRoads" HorizontalAlignment="Left" Margin="214,119,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtRivers" HorizontalAlignment="Left" Margin="214,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtWater" HorizontalAlignment="Left" Margin="214,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.RowSpan="2"/>
+        <TextBox x:Name="txtBuildings" HorizontalAlignment="Left" Margin="214,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
 
     </Grid>
 </Window>

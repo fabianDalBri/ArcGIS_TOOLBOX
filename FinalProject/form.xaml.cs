@@ -383,6 +383,19 @@ namespace FinalProject
         {
             checkRadio();
             CalculateBuffer();
+            if (Global.type == "roads")
+            {
+               // txtRoads.Text = "Road data added";
+            }else if (Global.type == "water")
+            {
+               // txtWater.Text = "Water data added";
+            }else if(Global.type == "rivers")
+            {
+               // txtRivers.Text = "River data added";
+            }else if(Global.type == "buildings")
+            {
+               // txtBuildings.Text = "Building data added";
+            }
         }
         public void checkRadio()
         {
