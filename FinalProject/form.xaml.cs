@@ -19,6 +19,8 @@ namespace FinalProject
     /// </summary>
     public partial class form : Window
     {
+        string path = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\data\";
+
         public form()
         {
             InitializeComponent();
@@ -79,7 +81,7 @@ namespace FinalProject
         {
             string filepath = txtHojddata.Text;
             //MessageBox.Show(txtHojddata.Text);
-            string outputSlope = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slope.tif";
+            string outputSlope = path + "slope.tif";
             // Create a raster layer using a path to an image.
             // Note: You can create a raster layer from a url, project item, or data connection.
             QueuedTask.Run(() =>
@@ -96,18 +98,18 @@ namespace FinalProject
                     return;
                 }
                 MessageBox.Show("Slope calculation completed successfully.", "Success");
-                CalculateConstraint(outputSlope, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slopeCalculated.tif", "slope");
+                CalculateConstraint(outputSlope, path + "slopeCalculated.tif", "slope");
             });
         }
                 private void CalculateDEM()
         {
             string filepath = txtHojddata.Text;
-            CalculateConstraint(filepath, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\heightCalculated.tif", "height");
+            CalculateConstraint(filepath,path + "heightCalculated.tif", "height");
         }
         private void CalculateAspect()
         {
             string filepath = txtHojddata.Text;
-            string outputAspect = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\aspect.tif";
+            string outputAspect = path + "aspect.tif";
             //Uri defaultGeodatabasePath = new Uri(Project.Current.DefaultGeodatabasePath);
             // Create a raster layer using a path to an image.
             // Note: You can create a raster layer from a url, project item, or data connection.
@@ -123,13 +125,13 @@ namespace FinalProject
                     return;
                 }
                 MessageBox.Show("Aspect calculation completed successfully.", "Success");
-                CalculateConstraint(outputAspect, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\directionCalculated.tif", "direction");
+                CalculateConstraint(outputAspect, path + "directionCalculated.tif", "direction");
             });
         }
         public void CalculateBuffer()
         {
             string filepath = txtVagData.Text;
-            string outputbuff = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffer.shp";
+            string outputbuff = path + "buffer.shp";
             //Uri defaultGeodatabasePath = new Uri(Project.Current.DefaultGeodatabasePath);
             // Create a raster layer using a path to an image.
             // Note: You can create a raster layer from a url, project item, or data connection.
@@ -152,9 +154,9 @@ namespace FinalProject
 
         private void EraseBuffer(string input)
         {
-            string rutnatpath = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\rutnat.shp";
+            string rutnatpath = path + "rutnat.shp";
             string bufferpath = input;
-            string output = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\mergedBuffer.shp";
+            string output = path + "mergedBuffer.shp";
             //Uri defaultGeodatabasePath = new Uri(Project.Current.DefaultGeodatabasePath);
             // Create a raster layer using a path to an image.
             // Note: You can create a raster layer from a url, project item, or data connection.
@@ -177,7 +179,7 @@ namespace FinalProject
         public void BufferToRaster(string input)
         {
             string filepath = input;
-            string outputRaster = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\bufferRaster.tif";
+            string outputRaster = path + "bufferRaster.tif";
             //Uri defaultGeodatabasePath = new Uri(Project.Current.DefaultGeodatabasePath);
             // Create a raster layer using a path to an image.
             // Note: You can create a raster layer from a url, project item, or data connection.
@@ -196,19 +198,19 @@ namespace FinalProject
                 MessageBox.Show("Buffer to raster calculation completed successfully.", "Success");
                 if (Global.type.Equals("roads"))
                 {
-                    CalculateConstraint(outputRaster, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterRoads.tif", "bufferedRoads");
+                    CalculateConstraint(outputRaster, path + "buffCalcRasterRoads.tif", "bufferedRoads");
                 }
                 else if (Global.type.Equals("water"))
                 {
-                    CalculateConstraint(outputRaster, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterWater.tif", "buffered");
+                    CalculateConstraint(outputRaster, path + "buffCalcRasterWater.tif", "buffered");
                 }
                 else if (Global.type.Equals("rivers"))
                 {
-                    CalculateConstraint(outputRaster, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterRivers.tif", "buffered");
+                    CalculateConstraint(outputRaster, path + "buffCalcRasterRivers.tif", "buffered");
                 }
                 else if (Global.type.Equals("buildings"))
                 {
-                    CalculateConstraint(outputRaster, @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterBuildings.tif", "buffered");
+                    CalculateConstraint(outputRaster, path + "buffCalcRasterBuildings.tif", "buffered");
                 }
 
             });
@@ -305,19 +307,19 @@ namespace FinalProject
 
         private void createMCA()
         {
-            string slope = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\slopeCalculated.tif";
-            string height = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\heightCalculated.tif";
-            string direction = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\directionCalculated.tif";
-            string bufferRivers = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterRivers.tif";
-            string bufferWater = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterWater.tif";
-            string bufferRoads = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterRoads.tif";
-            string bufferBuildings = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\buffCalcRasterBuildings.tif";
-            string windData = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\VindRasterUpdated.tif";
+            string slope = path + "slopeCalculated.tif";
+            string height = path + "heightCalculated.tif";
+            string direction = path + "directionCalculated.tif";
+            string bufferRivers = path + "buffCalcRasterRivers.tif";
+            string bufferWater = path + "buffCalcRasterWater.tif";
+            string bufferRoads = path + "buffCalcRasterRoads.tif";
+            string bufferBuildings = path + "buffCalcRasterBuildings.tif";
+            string windData = path + "VindRasterUpdated.tif";
 
 
 
             string maExpression = $"Int(\"{slope}\") * Int(\"{height}\") * Int(\"{direction}\") * Int(\"{bufferRivers}\") * Int(\"{bufferRoads}\") * Int(\"{bufferBuildings}\") * Int(\"{bufferWater}\") * Int(\"{windData}\")";
-            string output = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\MCA.tif";
+            string output = path + "MCA.tif";
 
             MessageBox.Show(maExpression);  
 
@@ -347,7 +349,7 @@ namespace FinalProject
             string rasterPath = uri.LocalPath;
 
             MessageBox.Show(rasterPath);
-            string outputShapefilePath = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\finalMCApolygon.shp";
+            string outputShapefilePath = path + "finalMCApolygon.shp";
             MessageBox.Show(outputShapefilePath);
             // Perform the conversion
             QueuedTask.Run(() =>
