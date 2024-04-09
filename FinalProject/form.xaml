@@ -5,14 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalProject"
         mc:Ignorable="d"
-        Title="form" Height="351" Width="588">
+        Title="form" Height="351" Width="568">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="174*"/>
             <RowDefinition Height="161*"/>
         </Grid.RowDefinitions>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="394,15,19,42" Grid.RowSpan="2"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="10,10,411,46" Grid.RowSpan="2"/>
         <Button Content="Hojddata" HorizontalAlignment="Left" Margin="435,31,0,0" VerticalAlignment="Top" Width="80" Click="Hojddata_Click"/>
         <Button Content="Bufferdata" HorizontalAlignment="Left" Margin="50,22,0,0" VerticalAlignment="Top" Width="76" Click="Vagdata_Click"/>
         <TextBox x:Name="txtHojddata" HorizontalAlignment="Left" Margin="414,56,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="123" TextChanged="txtHojddata_TextChanged"/>
@@ -30,6 +28,8 @@
 
 
         </Grid>
+        <Rectangle HorizontalAlignment="Left" Height="279" Margin="10,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160"/>
+        <Rectangle HorizontalAlignment="Left" Height="279" Margin="396,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160"/>
 
 
     </Grid>
