@@ -5,43 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalProject"
         mc:Ignorable="d"
-        Title="form" Height="394" Width="569">
+        Title="form" Height="394" Width="726">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="195*"/>
             <ColumnDefinition Width="373*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="181*"/>
-            <RowDefinition Height="166*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="197*"/>
+            <RowDefinition Height="180*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Rectangle HorizontalAlignment="Left" Height="279" Margin="10,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160"/>
-        <Rectangle HorizontalAlignment="Left" Height="279" Margin="178,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160" Grid.Column="1"/>
-        <Rectangle HorizontalAlignment="Left" Height="279" Margin="194,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="2"/>
-        <Button Content="Hojddata" HorizontalAlignment="Left" Margin="218,22,0,0" VerticalAlignment="Top" Width="80" Click="Hojddata_Click" Grid.Column="1"/>
-        <Button Content="Bufferdata" HorizontalAlignment="Left" Margin="50,22,0,0" VerticalAlignment="Top" Width="76" Click="Vagdata_Click"/>
-        <TextBox x:Name="txtHojddata" HorizontalAlignment="Left" Margin="196,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="123" TextChanged="txtHojddata_TextChanged" Grid.Column="1"/>
-        <TextBox x:Name="txtVagData" HorizontalAlignment="Left" Margin="28,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnSlope" Content="Calculate Slope" HorizontalAlignment="Left" Margin="196,56,0,0" VerticalAlignment="Top" Click="Slope_Click" Width="87" Grid.Row="1" Grid.Column="1"/>
-        <Button x:Name="btnAspect" Content="Calculate Aspect" HorizontalAlignment="Left" Margin="196,30,0,0" VerticalAlignment="Top" Click="Aspect_Click" Width="93" Grid.Row="1" Grid.Column="1"/>
-        <Button x:Name="btnHeight" Content="Calculate Height" HorizontalAlignment="Left" Margin="196,5,0,0" VerticalAlignment="Top" Click="Height_Click" Width="93" Grid.Row="1" Grid.Column="1"/>
-        <Button Content="Calculate Buffer" HorizontalAlignment="Left" Margin="28,56,0,0" VerticalAlignment="Top" Click="Buffer_Click" Grid.Row="1"/>
-        <Button Content="Create MCA" HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top" Click="MCA_Click" Grid.Row="1"/>
+        <Rectangle HorizontalAlignment="Center" Height="279" Margin="0,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="210"/>
+        <Rectangle HorizontalAlignment="Left" Height="279" Margin="236,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="210" Grid.Column="1"/>
+        <Rectangle HorizontalAlignment="Left" Height="279" Margin="4,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="210" Grid.Column="1"/>
+        <Button Content="Hojddata" HorizontalAlignment="Left" Margin="289,20,0,0" VerticalAlignment="Top" Width="80" Click="Hojddata_Click" Grid.Column="1" Height="20"/>
+        <Button Content="Bufferdata" HorizontalAlignment="Left" Margin="50,22,0,0" VerticalAlignment="Top" Width="76" Click="Vagdata_Click" Height="20"/>
+        <TextBox x:Name="txtHojddata" HorizontalAlignment="Left" Margin="267,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="123" TextChanged="txtHojddata_TextChanged" Grid.Column="1" Height="18"/>
+        <TextBox x:Name="txtVagData" HorizontalAlignment="Left" Margin="28,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Height="18"/>
+        <Button x:Name="btnSlope" Content="Calculate Slope" HorizontalAlignment="Left" Margin="248,21,0,0" VerticalAlignment="Top" Click="Slope_Click" Width="93" Grid.Row="1" Grid.Column="1" Height="20"/>
+        <Button x:Name="btnAspect" Content="Calculate Aspect" HorizontalAlignment="Left" Margin="248,187,0,0" VerticalAlignment="Top" Click="Aspect_Click" Width="93" Grid.Column="1" Grid.RowSpan="2" Height="20"/>
+        <Button x:Name="btnHeight" Content="Calculate Height" Margin="248,156,0,0" VerticalAlignment="Top" Click="Height_Click" Grid.Column="1" HorizontalAlignment="Left" Width="93" Height="20"/>
+        <Button Content="Calculate Buffer" HorizontalAlignment="Left" Margin="28,56,0,0" VerticalAlignment="Top" Click="Buffer_Click" Grid.Row="1" Height="20" Width="87"/>
+        <Button Content="Create MCA" HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top" Click="MCA_Click" Grid.Row="1" Height="20" Width="68"/>
         <Grid HorizontalAlignment="Left" Height="103" Margin="28,144,0,0" VerticalAlignment="Top" Width="92" Grid.RowSpan="2">
             <RadioButton x:Name="water" Content="Water" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="roads" Content="Roads" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True"/>
             <RadioButton x:Name="rivers" Content="Rivers" HorizontalAlignment="Left" Margin="0,52,0,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="buildings" Content="Buildings" HorizontalAlignment="Left" Margin="0,78,0,0" VerticalAlignment="Top"/>
         </Grid>
-        <Label Content="Added data" HorizontalAlignment="Left" Margin="43,22,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <TextBox x:Name="txtRoads" HorizontalAlignment="Left" Margin="19,119,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.Column="1"/>
-        <TextBox x:Name="txtRivers" HorizontalAlignment="Left" Margin="19,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.Column="1"/>
-        <TextBox x:Name="txtWater" HorizontalAlignment="Left" Margin="19,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.RowSpan="2" Grid.Column="1"/>
-        <TextBox x:Name="txtBuildings" HorizontalAlignment="Left" Margin="19,22,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.Row="1" Grid.Column="1"/>
-        <TextBox x:Name="txtHeight" HorizontalAlignment="Left" Margin="84,119,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.Column="1"/>
-        <TextBox x:Name="txtAspect" HorizontalAlignment="Left" Margin="84,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.Column="1"/>
-        <TextBox x:Name="txtSlope" HorizontalAlignment="Left" Margin="84,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.RowSpan="2" Grid.Column="1"/>
+        <Label Content="Added data" HorizontalAlignment="Left" Margin="78,29,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="72"/>
+        <TextBox x:Name="txtRoads" HorizontalAlignment="Left" Margin="49,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.Column="1" Height="18"/>
+        <TextBox x:Name="txtRivers" HorizontalAlignment="Left" Margin="49,151,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.Column="1" Height="18"/>
+        <TextBox x:Name="txtWater" HorizontalAlignment="Left" Margin="49,181,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.RowSpan="2" Grid.Column="1" Height="18"/>
+        <TextBox x:Name="txtBuildings" HorizontalAlignment="Left" Margin="49,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.Row="1" Grid.Column="1" Height="18"/>
+        <TextBox x:Name="txtHeight" HorizontalAlignment="Left" Margin="114,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.Column="1" Height="18"/>
+        <TextBox x:Name="txtAspect" HorizontalAlignment="Left" Margin="114,151,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.Column="1" Height="18"/>
+        <TextBox x:Name="txtSlope" HorizontalAlignment="Left" Margin="114,181,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.RowSpan="2" Grid.Column="1" Height="18"/>
+        <Label x:Name="lblDemPar" Grid.Column="1" Content="Parameters" HorizontalAlignment="Left" Margin="349,111,0,0" VerticalAlignment="Top" Width="77" Height="26"/>
+        <TextBox x:Name="txtparHeight" Grid.Column="1" HorizontalAlignment="Left" Margin="360,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Height="18"/>
+        <TextBox x:Name="txtparAspectOne" Grid.Column="1" HorizontalAlignment="Left" Margin="346,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="38" Grid.RowSpan="2" Height="18"/>
+        <TextBox x:Name="txtparSlope" Grid.Column="1" HorizontalAlignment="Left" Margin="360,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" Grid.Row="1" Height="18"/>
+        <TextBox x:Name="txtparAspectTwo" Grid.Column="1" HorizontalAlignment="Left" Margin="400,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39" Grid.RowSpan="2" Height="18"/>
+        <Label Grid.Column="1" Content="&amp;" HorizontalAlignment="Left" Margin="384,186,0,0" VerticalAlignment="Top" Height="26" Width="23" FontSize="10" Grid.RowSpan="2"/>
+        <Label x:Name="lblDemPar_Copy" Content="bufferSize" HorizontalAlignment="Left" Margin="127,111,0,0" VerticalAlignment="Top" Width="77" Height="26"/>
+        <TextBox x:Name="txtparRoads" HorizontalAlignment="Left" Margin="139,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Height="18"/>
+        <TextBox x:Name="txtparWater" HorizontalAlignment="Left" Margin="139,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Height="18"/>
+        <TextBox x:Name="txtparRivers" HorizontalAlignment="Left" Margin="139,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Height="18" Grid.Row="1"/>
+        <TextBox x:Name="txtparBuildings" HorizontalAlignment="Left" Margin="139,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Grid.Row="1" Height="18"/>
 
     </Grid>
 </Window>
