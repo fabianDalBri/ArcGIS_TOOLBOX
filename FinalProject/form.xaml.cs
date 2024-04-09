@@ -101,7 +101,7 @@ namespace FinalProject
                 CalculateConstraint(outputSlope, path + "slopeCalculated.tif", "slope");
             });
         }
-                private void CalculateDEM()
+        private void CalculateDEM()
         {
             string filepath = txtHojddata.Text;
             CalculateConstraint(filepath,path + "heightCalculated.tif", "height");
@@ -367,16 +367,19 @@ namespace FinalProject
         private void Slope_Click(object sender, RoutedEventArgs e)
         {
             CalculateSlope();
+            txtSlope.Text = "Slope";
         }
 
         private void Aspect_Click(object sender, RoutedEventArgs e)
         {
-            CalculateAspect();  
+            CalculateAspect();
+            txtAspect.Text = "Aspect";
         }
 
         private void Height_Click(object sender, RoutedEventArgs e)
         {
             CalculateDEM();
+            txtHeight.Text = "Height";
         }
 
         private void Buffer_Click(object sender, RoutedEventArgs e)
@@ -385,25 +388,25 @@ namespace FinalProject
             CalculateBuffer();
             if (Global.type == "roads")
             {
-               // txtRoads.Text = "Road data added";
+               txtRoads.Text = "Road";
             }else if (Global.type == "water")
             {
-               // txtWater.Text = "Water data added";
+               txtWater.Text = "Water";
             }else if(Global.type == "rivers")
             {
-               // txtRivers.Text = "River data added";
+               txtRivers.Text = "River";
             }else if(Global.type == "buildings")
             {
-               // txtBuildings.Text = "Building data added";
+               txtBuildings.Text = "Building";
             }
         }
         public void checkRadio()
         {
-            if(roads.IsChecked == true)
+            if (roads.IsChecked == true)
             {
                 Global.type = "roads";
             }
-            else if(water.IsChecked == true)
+            else if (water.IsChecked == true)
             {
                 Global.type = "water";
             }
