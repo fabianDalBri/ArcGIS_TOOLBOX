@@ -2,6 +2,7 @@
 using ArcGIS.Core.Geometry;
 using ArcGIS.Desktop.Core.Geoprocessing;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
+using ArcGIS.Desktop.Internal.Mapping.Symbology;
 using ArcGIS.Desktop.Mapping;
 using Microsoft.Win32;
 using System;
@@ -20,6 +21,7 @@ namespace FinalProject
     public partial class form : Window
     {
         string path = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\data\";
+        
 
         public form()
         {
@@ -221,10 +223,13 @@ namespace FinalProject
             Map map = MapView.Active.Map;
             string filepath = inRaster;
 
+            string he = txtparHeight.Text;
+            //int parHe = int.Parse(he);
 
             //Create an output file name for the layer
             // Create a raster layer using a path to an image.
             // Note: You can create a raster layer from a url, project item, or data connection.
+
             QueuedTask.Run(() =>
             {
                 //original RGB file as layer
@@ -255,7 +260,8 @@ namespace FinalProject
                 //calculate medium to high height from min max values
                 if (type.Equals("height"))
                 {
-                    maExpression = $"Con(\"{bandnameArray[0]}\" < 200, 1, 0)";
+                    
+                    maExpression = $"Con((\"{bandnameArray[0]}\" < 200), 1, 0)";
                 }
                 else if (type.Equals("slope"))
                 {
