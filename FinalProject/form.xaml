@@ -11,13 +11,16 @@
             <RowDefinition Height="174*"/>
             <RowDefinition Height="161*"/>
         </Grid.RowDefinitions>
-        <Button Content="Hojddata" HorizontalAlignment="Left" Margin="435,31,0,0" VerticalAlignment="Top" Width="80" Click="Hojddata_Click"/>
+        <Rectangle HorizontalAlignment="Left" Height="279" Margin="10,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160"/>
+        <Rectangle HorizontalAlignment="Left" Height="279" Margin="396,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160"/>
+        <Rectangle HorizontalAlignment="Center" Height="279" Margin="0,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160"/>
+        <Button Content="Hojddata" HorizontalAlignment="Left" Margin="436,22,0,0" VerticalAlignment="Top" Width="80" Click="Hojddata_Click"/>
         <Button Content="Bufferdata" HorizontalAlignment="Left" Margin="50,22,0,0" VerticalAlignment="Top" Width="76" Click="Vagdata_Click"/>
-        <TextBox x:Name="txtHojddata" HorizontalAlignment="Left" Margin="414,56,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="123" TextChanged="txtHojddata_TextChanged"/>
+        <TextBox x:Name="txtHojddata" HorizontalAlignment="Left" Margin="414,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="123" TextChanged="txtHojddata_TextChanged"/>
         <TextBox x:Name="txtVagData" HorizontalAlignment="Left" Margin="28,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Calculate Slope" HorizontalAlignment="Left" Margin="414,65,0,0" VerticalAlignment="Top" Click="Slope_Click" Width="87" Grid.Row="1"/>
-        <Button Content="Calculate Aspect" HorizontalAlignment="Left" Margin="414,39,0,0" VerticalAlignment="Top" Click="Aspect_Click" Width="93" Grid.Row="1"/>
-        <Button Content="Calculate Height" HorizontalAlignment="Left" Margin="414,15,0,0" VerticalAlignment="Top" Click="Height_Click" Width="93" Grid.Row="1"/>
+        <Button Content="Calculate Slope" HorizontalAlignment="Left" Margin="414,56,0,0" VerticalAlignment="Top" Click="Slope_Click" Width="87" Grid.Row="1"/>
+        <Button Content="Calculate Aspect" HorizontalAlignment="Left" Margin="414,30,0,0" VerticalAlignment="Top" Click="Aspect_Click" Width="93" Grid.Row="1"/>
+        <Button Content="Calculate Height" HorizontalAlignment="Left" Margin="414,5,0,0" VerticalAlignment="Top" Click="Height_Click" Width="93" Grid.Row="1"/>
         <Button Content="Calculate Buffer" HorizontalAlignment="Left" Margin="28,56,0,0" VerticalAlignment="Top" Click="Buffer_Click" Grid.Row="1"/>
         <Button Content="Create MCA" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Click="MCA_Click" Grid.Row="1"/>
         <Grid HorizontalAlignment="Left" Height="103" Margin="28,121,0,0" VerticalAlignment="Top" Width="92" Grid.RowSpan="2">
@@ -28,9 +31,6 @@
 
 
         </Grid>
-        <Rectangle HorizontalAlignment="Left" Height="279" Margin="10,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160"/>
-        <Rectangle HorizontalAlignment="Left" Height="279" Margin="396,10,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="160"/>
-
 
     </Grid>
 </Window>
