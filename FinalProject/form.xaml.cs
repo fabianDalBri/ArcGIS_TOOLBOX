@@ -21,17 +21,23 @@ namespace FinalProject
     public partial class form : Window
     {
         string path = @"\\hig-ad\student\homes\gis-applikationer\FinalProject\data\";
-        
+        string he = null;
+        string slo = null;
+        string aspOne = null;
+        string aspTwo = null;
 
         public form()
         {
             InitializeComponent();
             //first push
+            
         }
 
         public static class Global
         {
             public static string type = "";
+
+            
         }
         public String ChooseFile()
         {
@@ -137,10 +143,21 @@ namespace FinalProject
             //Uri defaultGeodatabasePath = new Uri(Project.Current.DefaultGeodatabasePath);
             // Create a raster layer using a path to an image.
             // Note: You can create a raster layer from a url, project item, or data connection.
+
+            string bufferCon = null;
+            int buff = 0;
+            if (txtparbuffer != null)
+            {
+                bufferCon = txtparbuffer.Text;
+                buff = int.Parse(bufferCon);
+                
+            }
+            else { MessageBox.Show("Need to enter a parameter for bufferSize", "Error");}
+
             QueuedTask.Run(() =>
             {
                 // Run the Slope geoprocessing tool
-                var parameters = Geoprocessing.MakeValueArray(filepath, outputbuff, 200);
+                var parameters = Geoprocessing.MakeValueArray(filepath, outputbuff, buff);
                 var gpSlope = Geoprocessing.ExecuteToolAsync("Analysis.buffer", parameters);
                 // Check if the tool executed successfully
                 if (gpSlope.Result.IsFailed)
@@ -151,7 +168,6 @@ namespace FinalProject
                 MessageBox.Show("Buffer calculation completed successfully.", "Success");
                     EraseBuffer(outputbuff);
             });
-
         }
 
         private void EraseBuffer(string input)
@@ -223,9 +239,6 @@ namespace FinalProject
             Map map = MapView.Active.Map;
             string filepath = inRaster;
 
-            string he = txtparHeight.Text;
-            //int parHe = int.Parse(he);
-
             //Create an output file name for the layer
             // Create a raster layer using a path to an image.
             // Note: You can create a raster layer from a url, project item, or data connection.
@@ -261,15 +274,15 @@ namespace FinalProject
                 if (type.Equals("height"))
                 {
                     
-                    maExpression = $"Con((\"{bandnameArray[0]}\" < 200), 1, 0)";
+                    maExpression = $"Con((\"{bandnameArray[0]}\" < {he}), 1, 0)";
                 }
                 else if (type.Equals("slope"))
                 {
-                    maExpression = $"Con((\"{bandnameArray[0]}\" < 30), 1, 0)";
+                    maExpression = $"Con((\"{bandnameArray[0]}\" < {slo}), 1, 0)";
                 }
                 else if (type.Equals("direction"))
                 {
-                    maExpression = $"Con((\"{bandnameArray[0]}\" > 112.5) & (\"{bandnameArray[0]}\" < 360), 0, 1)";
+                    maExpression = $"Con((\"{bandnameArray[0]}\" > {aspOne}) & (\"{bandnameArray[0]}\" < {aspTwo}), 0, 1)";
                 }
                 else if (type.Equals("bufferedRoads"))
                 {
@@ -371,19 +384,23 @@ namespace FinalProject
 
         } 
         private void Slope_Click(object sender, RoutedEventArgs e)
-        {
+        { 
+            slo = txtparSlope.Text;
             CalculateSlope();
             txtSlope.Text = "Slope";
         }
 
         private void Aspect_Click(object sender, RoutedEventArgs e)
         {
+            aspOne = txtparAspectOne.Text;
+            aspTwo = txtparAspectTwo.Text;
             CalculateAspect();
             txtAspect.Text = "Aspect";
         }
 
         private void Height_Click(object sender, RoutedEventArgs e)
         {
+            he = txtparHeight.Text;
             CalculateDEM();
             txtHeight.Text = "Height";
         }
